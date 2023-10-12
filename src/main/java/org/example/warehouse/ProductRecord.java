@@ -25,10 +25,7 @@ public class ProductRecord {
     }
 
     public ProductRecord(UUID uuid, String name, Category category, BigDecimal price) {
-        if(uuid==null) {
-            this.uuid = UUID.randomUUID();
-        } else
-            this.uuid = uuid;
+        this.uuid = Objects.requireNonNullElseGet(uuid, UUID::randomUUID);
         this.name = name;
         this.category = category;
         this.price = price;
@@ -50,17 +47,8 @@ public class ProductRecord {
         return price;
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        return super.equals(obj);
-//    }
-
-
-
-
-
-    }
-
-
 }
+
+
+
 

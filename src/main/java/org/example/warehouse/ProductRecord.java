@@ -9,7 +9,44 @@ public class ProductRecord {
     private final UUID uuid;
     private final String name;
     private final Category category;
-    private BigDecimal price;
+    public BigDecimal price;
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    public ProductRecord(UUID uuid, String name, Category category, BigDecimal price) {
+        if(uuid==null) {
+            this.uuid = UUID.randomUUID();
+        } else this.uuid = uuid;
+        this.name = name;
+        this.category = category;
+        this.price = price;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public String getName() { // *** check if required
+        return name;
+    }
+
+    public Category getCategory() {
+        return category();
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public UUID uuid() {
+        return uuid;
+    }
+
+    public Category category(){
+        return category;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -24,30 +61,12 @@ public class ProductRecord {
         return Objects.hash(uuid, name, category, price);
     }
 
-    public ProductRecord(UUID uuid, String name, Category category, BigDecimal price) {
-        this.uuid = Objects.requireNonNullElseGet(uuid, UUID::randomUUID);
-        this.name = name;
-        this.category = category;
+
+    public void price (BigDecimal price){
         this.price = price;
     }
-
-    public UUID getUuid() {
-        return uuid;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-}
 
 
 

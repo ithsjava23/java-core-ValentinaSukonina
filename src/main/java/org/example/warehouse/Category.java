@@ -1,6 +1,7 @@
 package org.example.warehouse;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class Category {
 
@@ -45,7 +46,9 @@ public class Category {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Category category = (Category) o;
-        return name.equals(category.name);
+        //return name.equals(category.name); //unclear which return is correct to use here
+        return Objects.equals(name, category.name);//from google
+
     }
 //
     // * Override the hashCode method to generate a hash code based on the name of the Category

@@ -2,6 +2,7 @@ package org.example.warehouse;
 
 import java.math.BigDecimal;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Warehouse {
     private String warehouse;
@@ -16,9 +17,6 @@ public class Warehouse {
     public Warehouse(String warehouse) {
         this.warehouse = warehouse;
     }
-
-
-
 
     // test 3. A public static method that returns a new instance of Warehouse with the given name
     public static Warehouse getInstance(String warehouse) {
@@ -36,35 +34,23 @@ public class Warehouse {
         return instance;
     }
 
-    private static Map<String, Warehouse> warehouseMap = new HashMap<>();
-
     // create array to hold products
-    public List<ProductRecord> productRecords = new ArrayList<>();
-    public final List<ProductRecord> productRecordsModified = new ArrayList<>();
+    public List<ProductRecord> productList = new ArrayList<>();
+    public List<Optional<ProductRecord>> productListChanged = new ArrayList<>();
+    //public List<ProductRecord> productListChanged;
 
+    public List<ProductRecord> getChangedProducts() {
+        return new ArrayList<ProductRecord>(productListChanged);
+    }
 
     public boolean isEmpty() {
-        //warehouse.isEmpty();
-        return getInstance().isEmpty();
+        return warehouse.isEmpty();
+        //return getInstance().isEmpty();
     }
-
-//    public boolean getProducts() {
-//        return (warehouse.getProducts()).isEmpty();
-//    }
-
-
-//   public boolean getProducts() { //need changes
-//        return getProducts();
-//   }*/
-
-//   // create array to hold products - see use before productRecord
-    //public List<ProductRecord> products = new ArrayList<>();
-    //public final List<ProductRecord> productsModified = new ArrayList<>();
 
     public List<ProductRecord> getProducts() {
-        return Collections.unmodifiableList(productRecords);
+        return Collections.unmodifiableList(productList);
     }
-
 
     public ProductRecord addProduct(UUID uuid, String name, Category category, BigDecimal price) {
         if (name == null || name.isEmpty()) {
@@ -82,19 +68,34 @@ public class Warehouse {
 
         ProductRecord productRecord = new ProductRecord(uuid, name, category, price);
         // Add the product record to the productRecords list
-        productRecords.add(productRecord);
+        productList.add(productRecord);
         return productRecord;
          }
 
     public List<ProductRecord> getProductById(UUID uuid) {
-        productRecords.stream()
-            .filter(product -> product.getUuid().equals(uuid)).findFirst();
-            return productRecords;
+        productList.stream()
+           // .filter(product -> product.getUuid().equals(uuid)).findFirst();
+            .filter(product -> product.getUuid().equals(uuid)).findAny();
+            return productList;
+    }
+
+    public Map<Category, List<ProductRecord>> getProductsGroupedByCategories () {
+        Map<Category, List<ProductRecord>> productsGroupedByCategories = productList.stream()
+                .collect(Collectors.groupingBy(ProductRecord::getCategory));
+            return productsGroupedByCategories;
+    }
+
+   public void updateProductPrice(UUID uuid, BigDecimal updatedPrice) {
+   Optional<ProductRecord> productRecord = productList.stream()
+           .filter(product -> product.uuid().equals(uuid))
+           .findFirst();
+   if (productRecord.isPresent()) {
+       productRecord.get().setPrice(updatedPrice);
+       productListChanged.add(productRecord);
+   }
+   else
+       throw new IllegalArgumentException("No such product was found in record");
     }
 
 
-//    public Map<Category, List<ProductRecord>> getProductsGroupedByCategories() {
-//        Map<Category, List<ProductRecord>> productsOfCategories = productRecords.stream()
-//                .collect(Collectors.groupingBy(ProductRecord::category));
-//    }
 }

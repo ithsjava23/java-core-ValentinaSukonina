@@ -34,29 +34,31 @@ public class Warehouse {
         return instance;
     }
 
-    // create array to hold products
-    public List<ProductRecord> productList = new ArrayList<>();
-    public List<Optional<ProductRecord>> productListChanged = new ArrayList<>();
-    //public List<ProductRecord> productListChanged;
-
-//    public List<ProductRecord> getChangedProducts() {
-//        return new ArrayList<ProductRecord>(productListChanged);
-//    }
-
     public boolean isEmpty() {
         return warehouse.isEmpty();
         //return getInstance().isEmpty();
     }
 
+    // create array to hold products
+    public List<ProductRecord> productList = new ArrayList<>();
+    public List<Optional<ProductRecord>> productListChanged = new ArrayList<>();
+
     public List<ProductRecord> getProducts() {
-        return Collections.unmodifiableList(productList);
+        //return Collections.unmodifiableList(productList);
+        return List.copyOf(productList);
     }
+//    public List<ProductRecord> getChangedProducts() {
+//        //return new ArrayList<>(productListChanged);
+//        return productListChanged;
+//    }
+
+
 
     public ProductRecord addProduct(UUID uuid, String name, Category category, BigDecimal price) {
         if (name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Product name can't be null or empty.");
         }
-        if (category == null || category.toString().isEmpty()) {
+        if (category == null) {
             throw new IllegalArgumentException("Category can't be null.");
         }
         if (uuid == null || uuid.toString().isEmpty()) {
@@ -66,18 +68,50 @@ public class Warehouse {
             price = BigDecimal.ZERO;
         }
 
-        ProductRecord productRecord = new ProductRecord(uuid, name, category, price);
+        //ProductRecord productRecord = new ProductRecord(uuid, name, category, price);
         // Add the product record to the productRecords list
-        productList.add(productRecord);
-        return productRecord;
+        //productList.add(productRecord);
+//        return productRecord;
+        return new ProductRecord(uuid, name, category, price);
          }
 
-    public List<ProductRecord> getProductById(UUID uuid) {
-        productList.stream()
-           // .filter(product -> product.getUuid().equals(uuid)).findFirst();
-            .filter(product -> product.getUuid().equals(uuid)).findAny();
-            return productList;
+    public Optional<ProductRecord> getProductById(UUID uuid) {
+        return productList.stream()
+                .filter(product -> product.getUuid().equals(uuid))
+                .findFirst();
     }
+
+
+//    public List<ProductRecord> getProductsBy(Category meat) {
+//        return productList.stream()
+//                .filter(product -> product.getCategory().equals(c))
+//    }
+//
+//
+//    public List<ProductRecord> getProductByVS(Category category) {
+//        return productList.stream()
+//                .filter(product -> product.getCategory().equals(category))
+//                .collect(Collectors.toList());
+//    }
+
+//    public List<ProductRecord> getProductsBy(Category category) {
+//        List<ProductRecord> productsByCategory = new ArrayList<>();
+//        for (ProductRecord  ::category)
+//        for (ProductRecord : ) {
+//            if (product.getCategory().equals(category)) {
+//                productsByCategor.add(product);
+//                }
+//            }
+//            return result;
+
+//        public List<ProductRecord> getProductsBy(Category category) {
+//            List<ProductRecord> productsByCategory = new ArrayList<>();
+//            for (ProductRecord:category)
+//                 ) {
+//
+//            }
+//
+//        }
 
     public Map<Category, List<ProductRecord>> getProductsGroupedByCategories () {
         Map<Category, List<ProductRecord>> productsGroupedByCategories = productList.stream()

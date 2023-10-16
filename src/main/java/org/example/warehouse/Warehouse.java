@@ -39,9 +39,9 @@ public class Warehouse {
     public List<Optional<ProductRecord>> productListChanged = new ArrayList<>();
     //public List<ProductRecord> productListChanged;
 
-    public List<ProductRecord> getChangedProducts() {
-        return new ArrayList<ProductRecord>(productListChanged);
-    }
+//    public List<ProductRecord> getChangedProducts() {
+//        return new ArrayList<ProductRecord>(productListChanged);
+//    }
 
     public boolean isEmpty() {
         return warehouse.isEmpty();

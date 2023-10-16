@@ -12,10 +12,10 @@ public class ProductRecord {
     public BigDecimal price;
 
     public ProductRecord(UUID uuid, String name, Category category, BigDecimal price) {
-//        if(uuid==null) {
-//            this.uuid = UUID.randomUUID();
-//        } else this.uuid = uuid;
-        this.uuid = uuid;
+        if(uuid==null) {
+            this.uuid = UUID.randomUUID();
+        } else this.uuid = uuid;
+        //this.uuid = uuid;
         this.name = name;
         this.category = category;
         this.price = price;

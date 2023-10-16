@@ -82,36 +82,36 @@ public class Warehouse {
     }
 
 
-//    public List<ProductRecord> getProductsBy(Category meat) {
-//        return productList.stream()
-//                .filter(product -> product.getCategory().equals(c))
-//    }
-//
-//
-//    public List<ProductRecord> getProductByVS(Category category) {
-//        return productList.stream()
-//                .filter(product -> product.getCategory().equals(category))
-//                .collect(Collectors.toList());
-//    }
+/*    public List<ProductRecord> getProductsBy(Category meat) {
+        return productList.stream()
+                .filter(product -> product.getCategory().equals(c))
+    }
 
-//    public List<ProductRecord> getProductsBy(Category category) {
-//        List<ProductRecord> productsByCategory = new ArrayList<>();
-//        for (ProductRecord  ::category)
-//        for (ProductRecord : ) {
-//            if (product.getCategory().equals(category)) {
-//                productsByCategor.add(product);
-//                }
-//            }
-//            return result;
 
-//        public List<ProductRecord> getProductsBy(Category category) {
-//            List<ProductRecord> productsByCategory = new ArrayList<>();
-//            for (ProductRecord:category)
-//                 ) {
-//
-//            }
-//
-//        }
+    public List<ProductRecord> getProductByVS(Category category) {
+        return productList.stream()
+                .filter(product -> product.getCategory().equals(category))
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductRecord> getProductsBy(Category category) {
+        List<ProductRecord> productsByCategory = new ArrayList<>();
+        for (ProductRecord  ::category)
+        for (ProductRecord : ) {
+            if (product.getCategory().equals(category)) {
+                productsByCategor.add(product);
+                }
+            }
+            return result;
+
+        public List<ProductRecord> getProductsBy(Category category) {
+            List<ProductRecord> productsByCategory = new ArrayList<>();
+            for (ProductRecord:category)
+                 ) {
+
+            }
+
+        }*/
 
     public Map<Category, List<ProductRecord>> getProductsGroupedByCategories () {
         Map<Category, List<ProductRecord>> productsGroupedByCategories = productList.stream()

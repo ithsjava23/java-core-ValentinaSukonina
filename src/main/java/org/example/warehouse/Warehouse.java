@@ -5,32 +5,33 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Warehouse {
-    private String warehouse;
-    public List<ProductRecord> productList; // array to hold products
-    public List<ProductRecord> productListChanged;
+    private String name;
+    private List<ProductRecord> productList; // array to hold products
+    private List<ProductRecord> productListChanged;
 
 
     private static Warehouse instance;
     private Warehouse() {}
 
-    private Warehouse(String warehouse) {
-        this.warehouse = warehouse;
+    private Warehouse(String name) {
+        this.name = name;
         this.productList = new ArrayList<>(productList);
         this.productListChanged = new ArrayList<>();
     }
 
-    public static Warehouse getInstance(String warehouse) {
-        return new Warehouse(warehouse);
+    public static Warehouse getInstance(String name) {
+        return new Warehouse(name);
     }
     public static Warehouse getInstance() {
         if (instance == null) {
-            instance = new Warehouse("Warehouse");
+            instance = new Warehouse("MyStore");
         }
         return instance;
     }
 
     public boolean isEmpty() {
-        return warehouse.isEmpty();
+        //return warehouse.isEmpty();
+        return getProducts().isEmpty();
     }
     public ProductRecord addProduct(UUID uuid, String name, Category category, BigDecimal price) {
         if ((name == null) || name.isEmpty()){

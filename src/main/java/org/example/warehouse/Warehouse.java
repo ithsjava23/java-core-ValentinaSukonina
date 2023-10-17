@@ -13,7 +13,7 @@ public class Warehouse {
     private static Warehouse instance;
     private Warehouse() {}
 
-    public Warehouse(String warehouse) {
+    private Warehouse(String warehouse) {
         this.warehouse = warehouse;
         this.productList = new ArrayList<>(productList);
         this.productListChanged = new ArrayList<>();
@@ -24,7 +24,7 @@ public class Warehouse {
     }
     public static Warehouse getInstance() {
         if (instance == null) {
-            instance = new Warehouse();
+            instance = new Warehouse("Warehouse");
         }
         return instance;
     }
@@ -86,7 +86,8 @@ public class Warehouse {
         }
     }
     public List<ProductRecord> getChangedProducts(){
-        return List.copyOf(productListChanged);
+        //return List.copyOf(productListChanged);
+        return productListChanged;
     }
 }
 

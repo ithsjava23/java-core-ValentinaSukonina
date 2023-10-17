@@ -9,7 +9,6 @@ public class Category {
 
     private static final HashMap<String, Category> categories = new HashMap<>();
 
-    // ?? use with exception
     private Category(String name) {
         if (name == null)
             throw new IllegalArgumentException("Category name can't be null");

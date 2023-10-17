@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
 
-//check if class or record should be used
 public class ProductRecord {
     private final UUID uuid;
     private final String name;
@@ -36,7 +35,7 @@ public class ProductRecord {
         return category();
     }
 
-    public BigDecimal getPrice() {
+    public BigDecimal price(){
         return price;
     }
 
@@ -61,11 +60,6 @@ public class ProductRecord {
         return Objects.hash(uuid, name, category, price);
     }
 
-
-
-
-//    public boolean price() {
-//    }
 }
 
 

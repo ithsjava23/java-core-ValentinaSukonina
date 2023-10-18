@@ -101,7 +101,7 @@ class WarehouseTest {
         void addingAProduct() {
             warehouse = Warehouse.getInstance("New warehouse");
             UUID_milk = UUID.randomUUID();
-//            addedProduct = warehouse.addProduct(UUID_milk, "Milk", Category.of("Dairy"), BigDecimal.valueOf(999, 2));
+            addedProduct = warehouse.addProduct(UUID_milk, "Milk", Category.of("Dairy"), BigDecimal.valueOf(999, 2));
         }
 
         @Test
